@@ -1,6 +1,11 @@
-//INHERITANCE
+
 import java.util.Scanner;
-class Emp
+
+import java.util.Scanner;
+interface Transport{
+    public abstract void vehicle();
+}
+abstract class Emp
 {
     int id;
     String name;
@@ -29,10 +34,10 @@ class Emp
         System.out.println("Designation :"+desig);
     }
 
-
+    abstract void raise();
 
 }
-class Clerk extends Emp
+final class Clerk extends Emp implements Transport
 
 {
     String desig="CLERK";
@@ -47,11 +52,23 @@ class Clerk extends Emp
         System.out.println("Salary:"+salary);
         System.out.println("Designation :"+desig);
     }
+
+    @Override
+    void raise() {
+        salary = salary+10000;
+        System.out.println("Raise :"+10000);
+        System.out.println("Updated Salary:"+salary);
+    }
+
+    public void vehicle(){
+        System.out.println("Cab Reimbursement Provided");
+    }
+
 }
 
-class Developer extends Emp
+final class Developer extends Emp implements Transport
 {
-    String desig="Deverloper";
+    String desig="Developer";
     int salary=40000;
     void display()
     {
@@ -62,9 +79,21 @@ class Developer extends Emp
         System.out.println("Salary:"+salary);
         System.out.println("Designation :"+desig);
     }
+
+    @Override
+    void raise() {
+        salary = salary+15000;
+        System.out.println("Raise :"+15000);
+        System.out.println("Updated Salary:"+salary);
+    }
+
+    public void vehicle(){
+        System.out.println("Shuttle Facility Available");
+    }
+
 }
 
-class Tester extends Emp
+final class Tester extends Emp implements Transport
 {
     String desig="Tester";
     int salary=60000;
@@ -77,9 +106,20 @@ class Tester extends Emp
         System.out.println("Salary:"+salary);
         System.out.println("Designation :"+desig);
     }
+    @Override
+    void raise() {
+        salary = salary+20000;
+        System.out.println("Raise :"+20000);
+        System.out.println("Updated Salary:"+salary);
+    }
+
+    public void vehicle(){
+        System.out.println("Cab Facility Available");
+    }
+
 }
 
-class Manager extends Emp
+final class Manager extends Emp implements Transport
 {
     String desig="Manager";
     int salary=55000;
@@ -92,6 +132,17 @@ class Manager extends Emp
         System.out.println("Salary:"+salary);
         System.out.println("Designation :"+desig);
     }
+    @Override
+    void raise() {
+        salary = salary+22000;
+        System.out.println("Raise :"+22000);
+        System.out.println("Updated Salary:"+salary);
+    }
+
+    public void vehicle(){
+        System.out.println("Personal Car provided.");
+    }
+
 }
 
 
@@ -100,10 +151,10 @@ class Designation
     public static void main(String args[])
     {
         int ch=0;
+        try{
         Scanner sc= new Scanner(System.in);
         do{
-            System.out.println("\n ");
-            System.out.println("1 ) Clerk ");
+            System.out.println("\n1 ) Clerk ");
             System.out.println("2 ) Developer");
             System.out.println("3 ) Tester ");
             System.out.println("4 ) Manager");
@@ -114,28 +165,43 @@ class Designation
             {
                 Clerk c= new Clerk();
                 c.display();
+                c.raise();
+                c.vehicle();
             }
             else if(ch==2)
             {
                 Developer d = new Developer();
                 d.display();
+                d.raise();
+                d.vehicle();
             }
             else if(ch==3)
             {
                 Tester t = new Tester();
                 t.display();
+                t.raise();
+                t.vehicle();
             }
             else if(ch==4)
             {
                 Manager m = new Manager();
                 m.display();
+                m.raise();
+                m.vehicle();
             }
             else if(ch==5)
             {
                 System.out.println("Thank you");
                 System.exit(0);
             }
+            else{
+                System.out.println("Invalid choice!");
+            }
 
         }while(ch<=4);
+    }
+        catch(Exception e){
+            System.out.println("Invalid choice!");
+        }
     }
 }
